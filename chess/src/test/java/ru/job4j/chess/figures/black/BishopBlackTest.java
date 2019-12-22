@@ -1,3 +1,8 @@
+/**
+ * Пакет тестов на методы игры chess
+ *
+ * @author Maksim Tiunchik
+ */
 package ru.job4j.chess.figures.black;
 
 import org.junit.After;
@@ -8,47 +13,21 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.chess.Logic;
 import ru.job4j.chess.firuges.*;
-import ru.job4j.chess.firuges.black.BishopBlack;
+import ru.job4j.chess.firuges.black.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.StringJoiner;
 
+/**
+ * Класс BishopBlackTest - набор автоматических тестов для фигуры BishopBlack
+ *
+ * @author Maksim Tiunchik (Senebh@gmail.com)
+ * @version 0.1
+ */
 public class BishopBlackTest {
-    /**
-     * Переменная записывает в себя ссылку на объект выполняющий функции вывода данных в консоль
-     */
-    private final PrintStream normalout = System.out;
-    /**
-     * Переменная записывает в себя ссылку на буфер, где может храниться выводимая в консоль информация
-     */
-    private final ByteArrayOutputStream testout = new ByteArrayOutputStream();
-
-    /**
-     * В данном методе вывод в консоль заменяется выводом в созданный ранее буфер.
-     */
-    @Before
-    public void readFromBuffer() {
-        System.setOut(new PrintStream(testout));
-    }
-
-    /**
-     * в данном методе возвращаеться вывод в консоль
-     */
-    @After
-    public void readFromConsole() {
-        System.setOut(normalout);
-    }
-
-    /**
-     * Проверка работы метода position
-     */
-    @Test
-    public void testBishopCreation() {
-        Figure bishop = new BishopBlack(Cell.A1);
-        Assert.assertEquals(bishop.position(),Cell.A1);
-    }
     /**
      * Проверка работы метода copy
      */
@@ -79,4 +58,18 @@ public class BishopBlackTest {
         Cell[] myWay = bishop.way(Cell.C1, Cell.G5);
         Assert.assertEquals(bishop.position(),Cell.C1);
     }
+    /**
+     * Тест метода move если на пути  есть другие фигуры
+     */
+    @Test
+    public void testBishopWayOnHisWay() {
+        Logic logic = new Logic();
+        Figure bishop = new BishopBlack(Cell.C1);
+        Figure rook = new RookBlack(Cell.D2);
+        logic.add(bishop);
+        logic.add(rook);
+        logic.move(Cell.C1,Cell.G5);
+        Assert.assertEquals(bishop.position(),Cell.C1);
+    }
 }
+

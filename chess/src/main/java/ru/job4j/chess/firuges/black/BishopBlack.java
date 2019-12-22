@@ -7,7 +7,7 @@ import java.lang.System.*;
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  */
 public class BishopBlack implements Figure {
     private final Cell position;

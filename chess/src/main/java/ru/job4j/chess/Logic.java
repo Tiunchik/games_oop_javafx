@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * //TODO add comments.
+ * Класс содержит меотды для упрвления игрой в шахматы - добавление фигур, вызов проверки хода фигуры, очистка доски
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -26,14 +26,14 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-            //if (steps.length > 0 && steps[steps.length - 1].equals(dest)) { А зачем это условие?
-            //    rst = true;
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) { //А зачем это условие?
+                rst = true;
             for (int check = 0; check < steps.length; check++) {
                 if (this.findBy(steps[check]) != -1) {
                     rst = false;
                 }
             }
-            //}
+            }
             if (rst) {
                 this.figures[index] = this.figures[index].copy(dest);
             }
