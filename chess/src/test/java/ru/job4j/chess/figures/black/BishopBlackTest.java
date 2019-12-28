@@ -69,7 +69,8 @@ public class BishopBlackTest {
         logic.add(bishop);
         logic.add(rook);
         logic.move(Cell.C1,Cell.G5);
-        Assert.assertEquals(bishop.position(),Cell.C1);
+        int expected = logic.findBy(Cell.G5);
+        Assert.assertTrue(expected == -1);
     }
 }
 
