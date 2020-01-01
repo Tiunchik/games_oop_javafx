@@ -66,11 +66,39 @@ public class Logic3TTest {
     }
 
     @Test
-    public void whenHasOWinner() {
+    public void whenHasOVerticalWinner() {
         Figure3T[][] table = {
-                {new Figure3T(true, false), new Figure3T(), new Figure3T()},
-                {new Figure3T(true, false), new Figure3T(true, false), new Figure3T()},
-                {new Figure3T(true, false), new Figure3T(), new Figure3T(true, false)},
+                {new Figure3T(false, true), new Figure3T(), new Figure3T()},
+                {new Figure3T(false, true), new Figure3T(true, false), new Figure3T()},
+                {new Figure3T(false, true), new Figure3T(), new Figure3T(true, false)},
+        };
+        Logic3T login = new Logic3T(table);
+        assertThat(login.isWinnerO(), is(true));
+    }
+
+    /**
+     * тест добавленный учеником
+     */
+    @Test
+    public void whenHasOBDiagonalWinner() {
+        Figure3T[][] table = {
+                {new Figure3T(), new Figure3T(), new Figure3T(false, true)},
+                {new Figure3T(), new Figure3T(false, true), new Figure3T()},
+                {new Figure3T(false, true), new Figure3T(), new Figure3T()},
+        };
+        Logic3T login = new Logic3T(table);
+        assertThat(login.isWinnerO(), is(true));
+    }
+
+    /**
+     * тест добавленный учеником
+     */
+    @Test
+    public void whenHasOBackDiagonalWinner() {
+        Figure3T[][] table = {
+                {new Figure3T(false, true), new Figure3T(), new Figure3T()},
+                {new Figure3T(), new Figure3T(false, true), new Figure3T()},
+                {new Figure3T(), new Figure3T(), new Figure3T(false, true)},
         };
         Logic3T login = new Logic3T(table);
         assertThat(login.isWinnerO(), is(true));
@@ -85,5 +113,19 @@ public class Logic3TTest {
         };
         Logic3T login = new Logic3T(table);
         assertThat(login.hasGap(), is(true));
+    }
+
+    /**
+     * тест добавленный учеником
+     */
+    @Test
+    public void whenHasNoGas() {
+        Figure3T[][] table = {
+                {new Figure3T(true, false), new Figure3T(false, true), new Figure3T(true, false)},
+                {new Figure3T(true, false), new Figure3T(false, true), new Figure3T(true, false)},
+                {new Figure3T(false, true), new Figure3T(true, false), new Figure3T(false, true)},
+        };
+        Logic3T login = new Logic3T(table);
+        assertThat(login.hasGap(), is(false));
     }
 }
