@@ -2,6 +2,7 @@ package job4j.tictactoe;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -54,7 +55,7 @@ public class Logic3T {
         }
 
         for (int index = 0; index < table.length && !rsl; index++) {
-            rsl =  this.fillBy(Figure3T::hasMarkO, index, 0, 0, 1);
+            rsl = this.fillBy(Figure3T::hasMarkO, index, 0, 0, 1);
         }
 
         if (!rsl) {
@@ -67,8 +68,6 @@ public class Logic3T {
     }
 
     public boolean hasGap() {
-        List<Figure3T> temp = Stream.of(table).flatMap(Arrays::stream).collect(Collectors.toList());
-        var count = temp.stream().filter(Figure3T::hasMarkO).count() + temp.stream().filter(Figure3T::hasMarkX).count();
-        return count != 9;
+        return Stream.of(table).flatMap(Arrays::stream).noneMatch(Objects::isNull);
     }
 }
